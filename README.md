@@ -4,11 +4,13 @@ This is a sample project of Async Web API with Flask + SQLAlchemy 2.0 + Alembic.
 It includes asynchronous DB access using asyncpg and test code.
 
 See [reference](https://github.com/rhoboro/async-fastapi-sqlalchemy/tree/main).
-[Flask Docs](https://flask.palletsprojects.com/en/3.0.x/)
-[Gunicorn](https://gunicorn.org/)
-[SQL Alchemy](https://docs.sqlalchemy.org/en/20/orm/index.html)
-[SQL Alchemy - PostgreSQL](https://docs.sqlalchemy.org/en/20/dialects/postgresql.html)
-[Alembic](https://alembic.sqlalchemy.org/en/latest/tutorial.html)
+
+Other References
+- [Flask Docs](https://flask.palletsprojects.com/en/3.0.x/)
+- [Gunicorn](https://gunicorn.org/)
+- [SQL Alchemy](https://docs.sqlalchemy.org/en/20/orm/index.html)
+- [SQL Alchemy - PostgreSQL](https://docs.sqlalchemy.org/en/20/dialects/postgresql.html)
+- [Alembic](https://alembic.sqlalchemy.org/en/latest/tutorial.html)
 
 # Setup
 
