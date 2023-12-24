@@ -59,3 +59,10 @@ INFO  [alembic.runtime.migration] Running upgrade a8483365f505 -> 24104b6e1e0c, 
 ```shell
 (venv) $ python3 -m pytest
 ```
+
+# Create Migration
+
+```shell
+(venv) $ cd app/migrations
+(venv) alembic revision -m "<name_of_migration_file>"
+```
