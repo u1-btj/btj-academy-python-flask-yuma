@@ -7,7 +7,7 @@ from werkzeug.exceptions import HTTPException
 from db import get_session
 from middlewares.authentication import generate_access_token, generate_refresh_token
 from models.user import User, UserSchema
-from .schema import (
+from .schemas import (
     RegisterRequest,
     LoginRequest,
     UserTokenSchema,

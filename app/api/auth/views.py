@@ -7,7 +7,7 @@ from middlewares.authentication import (
 )
 from werkzeug.exceptions import HTTPException
 from flask_pydantic import validate
-from .schema import (
+from .schemas import (
     RegisterRequest,
     RegisterResponse,
     LoginResponse,
