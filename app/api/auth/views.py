@@ -32,12 +32,13 @@ def create(
         return jsonify(RegisterResponse(
             status="success",
             message="success register new user",
-            data=resp_data,
+            data=resp_data.dict(),
         ).__dict__), 200
     except HTTPException as ex:
         return jsonify(RegisterResponse(
             status="error",
             message=ex.description,
+            data=None
         ).__dict__), ex.code
     except Exception as e:
         message = "failed to register new user"
@@ -49,6 +50,7 @@ def create(
         return jsonify(RegisterResponse(
             status="error",
             message=message,
+            data=None
         ).__dict__), 500
 
 @router.route("/login", methods=['POST'])
@@ -69,6 +71,7 @@ def login(
         return jsonify(LoginResponse(
             status="error",
             message=ex.description,
+            data=None
         ).__dict__), ex.code
     except Exception as e:
         message = "failed to login"
@@ -79,6 +82,7 @@ def login(
         return jsonify(LoginResponse(
             status="error",
             message=message,
+            data=None
         ).__dict__), 500
 
 @router.route("/refresh-token", methods=['GET'])
@@ -97,6 +101,7 @@ def refresh_token():
         return jsonify(RefreshTokenResponse(
             status="error",
             message=ex.description,
+            data=None
         ).__dict__), ex.code
     except Exception as e:
         message = "failed refresh token"
@@ -107,6 +112,7 @@ def refresh_token():
         return jsonify(RefreshTokenResponse(
             status="error",
             message=message,
+            data=None
         ).__dict__), 500
 
 @router.route("/change-password", methods=['PUT'])

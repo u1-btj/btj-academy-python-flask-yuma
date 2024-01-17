@@ -90,9 +90,10 @@ class LoginUser:
                 exception.code = 401
                 raise exception
 
-            resp_data = UserTokenSchema.from_orm(user)
-            resp_data.access_token = generate_access_token(user.user_id)
-            resp_data.refresh_token = generate_refresh_token(user.user_id)
+            resp_data = UserTokenSchema(
+                user=UserSchema.from_orm(user).dict(), 
+                access_token=generate_access_token(user.user_id), 
+                refresh_token=generate_refresh_token(user.user_id))
 
             return resp_data
 

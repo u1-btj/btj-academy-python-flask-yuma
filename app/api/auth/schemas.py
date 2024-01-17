@@ -15,7 +15,8 @@ class RegisterResponse(BaseResponse):
     data: dict | None
 
 
-class UserTokenSchema(UserSchema):
+class UserTokenSchema(BaseModel):
+    user: dict
     access_token: str | None
     refresh_token: str | None
 

@@ -39,6 +39,7 @@ def read_all(
         return jsonify(ReadAllUserResponse(
             status="error",
             message=ex.description,
+            data=None
         ).__dict__), ex.code
     except Exception as e:
         message = "failed to read users"
@@ -50,6 +51,7 @@ def read_all(
         return jsonify(ReadAllUserResponse(
             status="error",
             message=message,
+            data=None
         ).__dict__), 500
 
 @router.route("/<user_id>", methods=["GET"])
@@ -72,6 +74,7 @@ def read(
         return jsonify(ReadUserResponse(
             status="error",
             message=ex.description,
+            data=None
         ).__dict__), ex.code
     except Exception as e:
         message = "failed to read user"
@@ -83,6 +86,7 @@ def read(
         return jsonify(ReadUserResponse(
             status="error",
             message=message,
+            data=None
         ).__dict__), 500
 
 @router.route("/", methods=["PUT"])
@@ -105,6 +109,7 @@ def update(
         return jsonify(UpdateUserResponse(
             status="error",
             message=ex.description,
+            data=None
         ).__dict__), ex.code
     except Exception as e:
         message="failed to update user"
@@ -116,6 +121,7 @@ def update(
         return jsonify(UpdateUserResponse(
             status="error",
             message=message,
+            data=None
         ).__dict__), 500
 
 @router.route("/deactivate", methods=["PUT"])
@@ -136,6 +142,7 @@ def deactivate():
         return jsonify(BaseResponse(
             status="error",
             message=ex.description,
+            data=None
         ).__dict__), ex.code
     except Exception as e:
         message = "error deactivate user"
@@ -147,4 +154,5 @@ def deactivate():
         return jsonify(BaseResponse(
             status="error",
             message=message,
+            data=None
         ).__dict__), 500
