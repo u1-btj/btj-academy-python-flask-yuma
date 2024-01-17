@@ -1,9 +1,9 @@
 import os
 from pathlib import Path
 from typing import Any, Dict
+from pydantic_settings import BaseSettings # NEW
 
-from pydantic import BaseSettings, validator
-from pydantic.error_wrappers import ErrorWrapper, ValidationError
+from pydantic import validator, ValidationError
 
 
 class Settings(BaseSettings):
@@ -32,7 +32,7 @@ class Settings(BaseSettings):
         else:
             raise ValidationError(
                 errors=[
-                    ErrorWrapper(
+                    ValueError(
                         Exception("unsupported db type for DB_TYPE"),
                         loc="DB_TYPE",
                     )
