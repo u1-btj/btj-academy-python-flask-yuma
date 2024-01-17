@@ -1,5 +1,5 @@
 import sys
-from gunicorn.app.base import BaseApplication
+# from gunicorn.app.base import BaseApplication
 from flask import Flask
 from api.main import register_routes
 from db import ping_database
