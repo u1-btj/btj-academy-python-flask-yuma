@@ -57,7 +57,6 @@ class UserSchema(BaseModel):
     name: str
     email: str
     username: str
-    _password: str
     created_at: datetime.datetime | None
     updated_at: datetime.datetime | None
     deactivated_at: datetime.datetime | None
@@ -66,5 +65,4 @@ class UserSchema(BaseModel):
     deactivated_by: int | None
 
     class Config:
-        orm_mode = True
-        underscore_attrs_are_private = True
+        from_attributes = True

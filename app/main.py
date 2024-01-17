@@ -10,19 +10,19 @@ app = Flask(__name__)
 
 register_routes(app)
 
-class FlaskGunicornApplication(BaseApplication):
-    def __init__(self, app, options=None):
-        self.options = options or {}
-        self.application = app
-        super().__init__()
+# class FlaskGunicornApplication(BaseApplication):
+#     def __init__(self, app, options=None):
+#         self.options = options or {}
+#         self.application = app
+#         super().__init__()
 
-    def load_config(self):
-        for key, value in self.options.items():
-            if key in self.cfg.settings and value is not None:
-                self.cfg.set(key.lower(), value)
+#     def load_config(self):
+#         for key, value in self.options.items():
+#             if key in self.cfg.settings and value is not None:
+#                 self.cfg.set(key.lower(), value)
 
-    def load(self):
-        return self.application
+#     def load(self):
+#         return self.application
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
@@ -35,7 +35,8 @@ if __name__ == "__main__":
                 }
 
                 # Run Gunicorn with the Flask application
-                FlaskGunicornApplication(app, gunicorn_options).run()
+                # FlaskGunicornApplication(app, gunicorn_options).run()
+                app.run(host="0.0.0.0", port=settings.PORT,debug=True)
 
             case "migrate":
                 migrate_database_tables()
