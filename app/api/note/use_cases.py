@@ -27,3 +27,28 @@ class AddNewNote:
             session.flush()
 
             return NoteSchema.from_orm(note)
+        
+class DeleteNote:
+    def __init__(self) -> None:
+        self.session = get_session()
+
+    def execute(self, user_id: int, note_id: int) -> NoteSchema:
+        with self.session as session:
+            note = session.execute(
+                select(Note).where(
+                    (Note.note_id == note_id).__and__(Note.deleted_at == None)
+                )
+            )
+            note = note.scalars().first()
+
+            if not note:
+                exception = HTTPException(description="note not found")
+                exception.code = 404
+                raise exception
+
+            note.deleted_at = datetime.datetime.utcnow()
+            note.deleted_by = user_id
+
+            session.flush()
+
+            return NoteSchema.from_orm(note)
