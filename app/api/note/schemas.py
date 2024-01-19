@@ -7,3 +7,10 @@ class AddNoteRequest(BaseModel):
 
 class AddNoteResponse(BaseResponse):
     data: dict | None
+
+class UpdateNoteRequest(BaseModel):
+    title: str = Field(min_length=1, max_length=255)
+    content: str = Field(min_length=1, max_length=500)
+
+class UpdateNoteResponse(BaseResponse):
+    data: dict | None

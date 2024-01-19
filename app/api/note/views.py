@@ -6,11 +6,14 @@ from middlewares.authentication import get_user_id_from_access_token
 
 from .schemas import (
     AddNoteRequest,
-    AddNoteResponse
+    AddNoteResponse,
+    UpdateNoteRequest,
+    UpdateNoteResponse
 )
 from .use_cases import (
     AddNewNote,
-    DeleteNote
+    DeleteNote,
+    UpdateNote
 )
 
 router = Blueprint("note", __name__, url_prefix='/api/v1/notes')
@@ -70,7 +73,7 @@ def delete(
             message=ex.description,
         ).__dict__), ex.code
     except Exception as e:
-        message = "failed to read user"
+        message = "failed to delete note"
         if hasattr(e, "message"):
             message = e.message
         elif hasattr(e, "detail"):
@@ -79,4 +82,39 @@ def delete(
         return jsonify(BaseResponse(
             status="error",
             message=message,
+        ).__dict__), 500
+
+@router.route("/<note_id>", methods=["PUT"])
+@validate()
+def update(
+    body: UpdateNoteRequest,
+    note_id: int
+) -> UpdateNoteResponse:
+    try:
+        user_id = get_user_id_from_access_token(request)
+
+        resp_data = UpdateNote().execute(request=body, user_id=user_id, note_id=note_id)
+
+        return jsonify(UpdateNoteResponse(
+            status="success",
+            message="success update note",
+            data=resp_data.dict(),
+        ).__dict__), 200
+    except HTTPException as ex:
+        return jsonify(UpdateNoteResponse(
+            status="error",
+            message=ex.description,
+            data=None,
+        ).__dict__), ex.code
+    except Exception as e:
+        message = "failed to update note"
+        if hasattr(e, "message"):
+            message = e.message
+        elif hasattr(e, "detail"):
+            message = e.detail
+
+        return jsonify(UpdateNoteResponse(
+            status="error",
+            message=message,
+            data=None,
         ).__dict__), 500
