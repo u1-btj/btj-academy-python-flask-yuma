@@ -14,3 +14,13 @@ class UpdateNoteRequest(BaseModel):
 
 class UpdateNoteResponse(BaseResponse):
     data: dict | None
+
+class GetNoteResponse(BaseResponse):
+    data: dict | None
+
+class GetAllNotesResponse(BaseResponse):
+    data: dict | None
+
+class GetAllNotesRequest(PaginationParams):
+    filter_by_user_id: bool = True
+    include_deleted_note: bool = False
