@@ -41,6 +41,11 @@ class DeleteNote:
             )
             note = note.scalars().first()
 
+            if note.created_by != user_id:
+                exception = HTTPException(description="not valid credentials")
+                exception.code = 401
+                raise exception
+
             if not note:
                 exception = HTTPException(description="note not found")
                 exception.code = 404
@@ -65,6 +70,11 @@ class UpdateNote:
                 )
             )
             note = note.scalars().first()
+
+            if note.created_by != user_id:
+                exception = HTTPException(description="not valid credentials")
+                exception.code = 401
+                raise exception
 
             if not note:
                 exception = HTTPException(description="note not found")
