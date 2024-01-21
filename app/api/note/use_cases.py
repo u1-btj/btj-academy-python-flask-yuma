@@ -42,14 +42,14 @@ class DeleteNote:
             )
             note = note.scalars().first()
 
-            if note.created_by != user_id:
-                exception = HTTPException(description="not valid credentials")
-                exception.code = 401
-                raise exception
-
             if not note:
                 exception = HTTPException(description="note not found")
                 exception.code = 404
+                raise exception
+            
+            if note.created_by != user_id:
+                exception = HTTPException(description="not valid credentials")
+                exception.code = 401
                 raise exception
 
             note.deleted_at = datetime.datetime.utcnow()
@@ -72,14 +72,14 @@ class UpdateNote:
             )
             note = note.scalars().first()
 
-            if note.created_by != user_id:
-                exception = HTTPException(description="not valid credentials")
-                exception.code = 401
-                raise exception
-
             if not note:
                 exception = HTTPException(description="note not found")
                 exception.code = 404
+                raise exception
+
+            if note.created_by != user_id:
+                exception = HTTPException(description="not valid credentials")
+                exception.code = 401
                 raise exception
 
             note.title = request.title
@@ -104,14 +104,14 @@ class GetNote:
             )
             note = note.scalars().first()
 
-            if note.created_by != user_id:
-                exception = HTTPException(description="not valid credentials")
-                exception.code = 401
-                raise exception
-
             if not note:
                 exception = HTTPException(description="note not found")
                 exception.code = 404
+                raise exception
+
+            if note.created_by != user_id:
+                exception = HTTPException(description="not valid credentials")
+                exception.code = 401
                 raise exception
 
             return NoteSchema.from_orm(note)
